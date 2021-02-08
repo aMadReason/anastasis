@@ -1,0 +1,34 @@
+/* @import url('../assets/fonts/libre_baskerville/LibreBaskerville-Regular.ttf'); */
+@font-face { font-family: 'Libre Baskerville'; src: url('~@/assets/fonts/libre_baskerville/LibreBaskerville-Regular.ttf'); }
+@font-face { font-family: 'Lato'; src: url('~@/assets/fonts/lato/Lato-Regular.ttf'); }
+
+body {
+  --tea-heading-font: 'Libre Baskerville', serif; 
+  --tea-body-font: 'Lato', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.content {
+  background: var(--tea-bg-3);
+}
+
+.titlebar {
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  border-bottom: 1px solid var(--tea-bg-2);
+  background-color: var(--tea-bg-3);
+}
+
+.titlebar .title-text {
+  flex-basis: 100%;
+}
+
+.titlebar .title-text.more {
+  display: flex;
+}
+
+button[aria-pressed="true"] {
+  text-decoration: underline;
+}

@@ -1,0 +1,234 @@
+/** General Helpers **/
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.inline.block {
+  display: inline-block;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.position-central {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+/** Text Helpers **/
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+/** Button Helpers **/
+button.button.small {
+  min-height: 1rem;
+  padding: 0.1rem 0.2rem;
+  line-height: 1.1;
+}
+
+button.button.large {
+  font-size: larger;
+}
+
+/** Form Helpers **/
+.field {
+  position: relative;
+  padding: calc(var(--tea-spacing) / 2) 0 0;
+  margin-top: 0.8rem;
+}
+
+.field label {
+  margin-right: calc(var(--tea-spacing) / 2);
+  text-align: left;
+}
+
+.field input + label {
+  width: 100%;
+  transform: scale(0.8) translateY(50%);
+  transition: opacity 0.5s, transform 0.2s ease-out;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  opacity: 1;
+}
+
+.field input + label.up,
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label {
+  opacity: 0.7;
+  transform: scale(0.8) translateY(-50%);
+}
+
+/** List Helpers **/
+ul.unstyled,
+ol.unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.inline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+ul.inline li {
+  margin: 0 calc(var(--tea-spacing) / 2);
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Dividers */
+.text-divider {
+  display: flex;
+  align-items: center;
+  --text-divider-gap: 2rem;
+}
+
+.text-divider::before,
+.text-divider::after {
+  content: "";
+  height: 1px;
+  background-color: silver;
+  flex-grow: 1;
+}
+
+.text-divider::after {
+  margin-left: var(--text-divider-gap);
+}
+
+.text-divider::before {
+  margin-right: var(--text-divider-gap);
+}
+
+/* Security Check */
+a[target="_blank"]:not([rel~="noopener"]),
+a[target="_blank"]:not([rel~="noreferer"]) {
+  color: red !important;
+}
+/* 
+ * Prevents tab napping:
+ * https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/
+ */
+
+/* Accessibility */
+.auto-contrast-by-bg {
+  --red: 230;
+  --green: 230;
+  --blue: 230;
+  --aa-brightness: (
+      (var(--red) * 299) + (var(--green) * 587) + (var(--blue) * 114)
+    ) / 1000;
+  --aa-color: calc((var(--aa-brightness) - 128) * -1000);
+  background: rgb(var(--red), var(--green), var(--blue));
+  color: rgb(var(--aa-color), var(--aa-color), var(--aa-color));
+}
+
+a[title=""],
+a:not([title]) {
+  color: pink !important;
+}
+
+img:not(alt, [role="presentation"]) {
+  border: 2px solid pink !important;
+}
+
+/*
+	Improved screen reader only CSS class
+	@author Gaël Poupard
+		@note Based on Yahoo!'s technique
+		@author Thierry Koblentz
+		@see https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html
+	* 1.
+		@note `clip` is deprecated but works everywhere
+		@see https://developer.mozilla.org/en-US/docs/Web/CSS/clip
+	* 2.
+		@note `clip-path` is the future-proof version, but not very well supported yet
+		@see https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+		@see http://caniuse.com/#search=clip-path
+		@author Yvain Liechti
+		@see https://twitter.com/ryuran78/status/778943389819604992
+	* 3.
+		@note preventing text to be condensed
+		author J. Renée Beach
+		@see https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+		@note Drupal 8 goes with word-wrap: normal instead
+		@see https://www.drupal.org/node/2045151
+		@see http://cgit.drupalcode.org/drupal/commit/?id=5b847ea
+	* 4.
+		@note !important is important
+		@note Obviously you wanna hide something
+		@author Harry Roberts
+		@see https://csswizardry.com/2016/05/the-importance-of-important/
+*/
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important; /* 2 */
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important; /* 3 */
+}
+
+/*
+	Use in conjunction with .sr-only to only display content when it's focused.
+	@note Useful for skip links 
+	@see http://www.w3.org/TR/2013/NOTE-WCAG20-TECHS-20130905/G1
+	@note Based on a HTML5 Boilerplate technique, included in Bootstrap
+	@note Fixed a bug with position: static on iOS 10.0.2 + VoiceOver
+		@author Sylvain Pigeard
+		@see https://github.com/twbs/bootstrap/issues/20732
+*/
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  clip: auto !important;
+  -webkit-clip-path: none !important;
+  clip-path: none !important;
+  height: auto !important;
+  margin: auto !important;
+  overflow: visible !important;
+  width: auto !important;
+  white-space: normal !important;
+}
