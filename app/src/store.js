@@ -68,7 +68,7 @@ const store = {
       effects.play('pickup')
     }
 
-    if (['open', 'go through'].includes(action) && ['door'].includes(thing.noun)) {
+    if (['open', 'go through'].includes(action) && ['door'].includes(thing.noun) && thing.stateKey !== 'locked') {
       effects.play('door')
     }
 
