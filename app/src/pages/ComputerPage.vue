@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="monitor full-height">
-      <p>I'm still coding this bit so don;t bother with it.</p>
+      <p>I'm still coding this bit so don't bother with it.</p>
       <p>😜</p>
       <label>Password: </label>
       <input type="password" />
