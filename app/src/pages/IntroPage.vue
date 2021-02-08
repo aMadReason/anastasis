@@ -2,7 +2,7 @@
   <div class="intro-page text-center full-height">
     <article v-on:click="handleClick">
       <header>
-        <h1>Lazerus Project</h1>
+        <h1>Project for fun</h1>
       </header>
       <img :src="logo" alt="amadreason" />
     </article>
